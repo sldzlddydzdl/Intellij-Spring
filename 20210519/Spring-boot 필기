@@ -1,0 +1,104 @@
+
+주로 데이터를 주고 받을때 xml, json 형태를 주로 웹에서 주고 받는다
+
+최근에는 json 데이터를 주고받는다
+
+xml 데이터를 하기도하지만
+
+요새 거의 대부분 json으로 데이터를 주고받는다
+
+-- JSON
+
+변수데이터 종류
+string : value
+number : value
+boolean : value { }
+object : value
+array : value [ ]
+
+{
+
+  "key" : "value"
+ 위와같은  형식이다.
+}
+
+snake case : 단어의 구분마다 _(underbar)를 붙이는 방식
+kamel case : java 에서 변수선언와 비슷
+
+{
+  "phone_number" : "value", --> snake case
+  "phoneNumber" : "value" --> kamel case
+}
+
+제일 많이 사용하는거는 snake case 를 주로사용한다.
+
+{
+  "phone_number" : "010-1111-2222", --> String
+  "age" : 10, 		--> number
+  "isAgree" : false, 	--> boolean
+  "account" : {  	--> object 는 {}
+	"email" : "steve@gmail.com",
+	"password" : "1234"
+  }
+}
+
+
+// user 조회 하는 경우
+{
+  "user_list" : [   --> array
+	{
+	   "account" : "abcd",
+	   "password" : "1234"
+	},
+	{
+	   "account" : "aaaa",
+	   "password" : "1111"
+	},
+	{
+	   "account" : "bbbb",
+	   "password" : "2222"
+
+	}
+  ] 
+}
+
+{
+    "account" : "abcd",
+    "password" : "1234"
+
+}
+
+
+-- Annotation 들 정리
+
+@RequestController	Rest API 설정
+@RequestMapping		리소스를 설정 (method로 구분가능)
+
+@PostMapping		Post Resource 설정
+@RequestBody		Request Body 부분 Parsing
+@PathVariable		URL Path Variable Parsing
+@JsonProperty		json naming
+@JsonNaming		class json naming ( snake case 냐 kamel case냐 설정해줄수 있다.)
+
+
+-- PUT
+
+@RestController		Rest API 설정
+@RequestMapping		리소스를 설정(method로 구분가능)
+
+@PutMapping		Put Resource 설정
+@RequestBody		Request Body 부분 Parsing
+@PathVariable		URL Path Variable Parsing 
+
+
+-- DELETE
+
+@RequestController	Rest API 설정
+@RequestMapping		리소스를 설정(method로 구분가능)
+
+@DeleteMapping		Delete Resource 설정
+@RequestParam		URL Query Param Parsing
+@PathVariable		URL Path Variable Parsing
+Object			Query Param Object 로 Parsing
+
+
