@@ -1,0 +1,102 @@
+Object Mapper 
+
+Java 에서 많이 쓰는 JSON 관련 라이브러리 들이 
+
+구글에서 만든 GSON, Object Mapper 도 있다.
+
+Spring 에서는 Object Mapper 를 쓴다.
+
+
+------- Spring Boot Annotations
+
+Annotation			의미
+@SpringBootApplication		Spring boot application 으로 설정
+@Controller			View를 제공하는 controller 로 설정
+@RestController			REST API 를 제공하는 controller 로 설정
+@RequestMapping			URL 주소를 맵핑
+@GetMapping			Http GetMethod URL 주소 맵핑
+@PostMapping			Http PostMethod URL 주소 맵핑
+@PutMapping			Http PutMethod URL 주소 맵핑
+@DeleteMapping			Http DeleteMethod URL 주소 맵핑
+@ReuqestParam			URL Query Parameter 맵핑
+@RequestBody			Http Body를 Parsing 맵핑
+@Valid				POJO Java class 의 검증
+@Configration			1개 이상의 bean을 등록 할 때 설정
+@Component			1개의 Class 단위로 등록 할 때 사용
+@Bean				1개의 외부 library 로 부터 생성한 객체를 등록 시 사
+@Autowired			DI 를 위한 곳에 사용
+@Qualifier			@Autowired 사용시 bean 이 2개 이상 일때 명시적 사용
+@Resource			@Autowired + @Qualifier 의 개념으로 이해
+@Aspect				AOP 적용시 사용
+@Before				AOP 메소드 이전 호출 지정
+@After				AOP 메소드 호출 이후 지정 예외 발생 포함
+@Around				AOP 이전/ 이후 모두 포함 예외 발생 포함
+@AfterReturning			AOP 메소드의 호출이 정상일 때 실행
+@AfterThrowing			AOP 시 해당 메소드가 예외 발생시 지정
+
+
+------ Validation
+
+Validation 이란 프로그래밍에 있어서 가장 필요한 부분 입니다. 특히 Java 에서는 null 값에 
+대해서 접근 하려고 할 대 null pointer exception이 발생 함으로, 이러한 부분을 방지 하기
+위해서 미리 검증을 하는 과정을 Validation 이라고 합니다.
+
+단순하게는 아래와 같은 코드들 입니다.
+
+public void run(String account , String pw, int age ) {
+
+
+	if(account == null || pw == null){
+		return
+	}
+	
+	if(age == 0){
+		return
+	}
+
+	// 정상 Logic
+}
+
+1. 검증해야 할 값이 많은 경우 코드의 길이가 길어진다.
+
+2. 구현에 따라서 달라 질 수 있지만 Service Logic 과의 분리가 필요하다.
+
+3. 흩어져 있는 경우 어디에서 검증을 하는지 알기 어려우며, 재사용의 한계가 있다.
+
+4. 구현에 따라 달라 질 수 있지만, 검증 Logic이 변경 되는 경우 테스트 코드 등
+   참조하는 클래식에서 Logic이 변경되어야 하는 부분이 발생 할 수 있다.
+
+
+@Size			문자열 길이 측정			Int Type 불가
+@NotNull		null 불가
+@NotEmpty		null, "" 불가
+@NotBlank		null, "" ," " 불가
+@Past			과거 날짜
+@PastOrPresent		오늘이거나 과거 날짜
+@Future			미래 날짜
+@FutureOrPresent	오늘이거나 미래 날짜
+@Pattern		정규식 적용
+@Max			최대값
+@Min			최소값
+@AssertTure / False	별도 Logic 적용
+@Valid			해당 object validation 실행
+
+
+1. gradle dependecies
+implementation("org.springframework.boot:spring-boot-starter-validation")
+
+
+2. bean validation spec
+https://beanvalidation.org/2.0-jsr380/
+
+
+3. 핸드폰번호 정규식
+"^\\d{2,3}-\\d{3,4}-\\d{4}$"
+
+
+
+-------- Custom Validation // 생각지 못한 형태의 데이트타입을 다뤄야할때
+
+1. AssertTrue / False 와 같은 method 지정을 통해서 Custom Logic 적용 가능
+
+2. ConstraintValidator 를 적용하여 재사용이 가능한 Custom Logic 적용 가능
