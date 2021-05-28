@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ko"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalculatorApiController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">spring-calculator</a> &gt; <a href="index.source.html" class="el_package">com.example.springcalculator.controller</a> &gt; <span class="el_source">CalculatorApiController.java</span></div><h1>CalculatorApiController.java</h1><pre class="source lang-java linenums">package com.example.springcalculator.controller;
+
+import com.example.springcalculator.component.Calculator;
+import com.example.springcalculator.dto.Req;
+import com.example.springcalculator.dto.Res;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping(&quot;/api&quot;)
+<span class="fc" id="L11">@RequiredArgsConstructor</span>
+public class CalculatorApiController {
+
+    private final Calculator calculator;
+
+    @GetMapping(&quot;/sum&quot;)
+    public int sum(@RequestParam int x , @RequestParam int y){
+<span class="fc" id="L18">        return calculator.sum(x, y);</span>
+    }
+
+//    @GetMapping(&quot;/minus&quot;)
+//    public int minus(@RequestParam int x , @RequestParam int y){
+//        return  calculator.minus(x, y);
+//    }
+
+    @PostMapping(&quot;/minus&quot;)
+    public Res minus(@RequestBody Req req){
+<span class="fc" id="L28">        int result = calculator.minus(req.getX() , req.getY());</span>
+
+<span class="fc" id="L30">        Res res = new Res();</span>
+<span class="fc" id="L31">        res.setResult(result);</span>
+<span class="fc" id="L32">        res.setResponse(new Res.Body());</span>
+<span class="fc" id="L33">        return res;</span>
+//        return  calculator.minus(req.getX(), req.getY());
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
