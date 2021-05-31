@@ -1,0 +1,37 @@
+JPA 란 무엇일까요?
+
+JPA ( Java Persistence Api ) : 데이터에 접근하기위한 규격을 정의
+				좀더 구체적으로 정의한 개념
+
+ORM ( Object Relational Mapping ) : 전체적인 개념
+
+Hibernate : 
+
+spring data jap : srping 에서 hibernate 를 좀더 간편하게 쓰기위해 만든것
+		  실제로 Entity 에접근하지않아도 data 에 접근할 수있게 해준다.
+
+
+			Application
+
+	ORM		   JAP 
+
+		Spring Data jpa / Hibernate
+
+			   JDBC
+
+			   RDB
+
+
+데이터베이스와 Application 을 연결해주는것이 ORM 이라는 개념이다
+
+자바 진영에서는 ORM의 표준 스팩으로 JPA 라는 것을 인터페이스로 정의하여 제공하고있다.
+
+해당 JPA 실제 구현 클래스들을 모아둔것이 Hibernate 인데 그중에 자주 쓰이는 기능을
+
+좀더 사용하기 쉽도록 Spring framewrok 에서 다시한번더 묶음으로 제공하는것이
+
+Spring Data JPA 입니다. 
+
+
+
+
