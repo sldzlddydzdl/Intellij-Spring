@@ -1,0 +1,4 @@
+com/fastcampus/jpa/bookmanager/BookmanagerApplicationTests.java
+ com.fastcampus.jpa.bookmanager.BookmanagerApplicationTests
+com/fastcampus/jpa/bookmanager/controller/HelloWorldControllerTest.java
+ com.fastcampus.jpa.bookmanager.controller.HelloWorldControllerTest
