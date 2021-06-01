@@ -1,0 +1,416 @@
+H2 In-Memory DB 에 대해서
+
+
+
+-------- JpaRepository.java [interface]
+
+/*
+ * Copyright 2008-2021 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.springframework.data.jpa.repository;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.QueryByExampleExecutor;
+
+/**
+ * JPA specific extension of {@link org.springframework.data.repository.Repository}.
+ *
+ * @author Oliver Gierke
+ * @author Christoph Strobl
+ * @author Mark Paluch
+ * @author Sander Krabbenborg
+ * @author Jesse Wouters
+ */
+@NoRepositoryBean
+public interface JpaRepository<T, ID> extends PagingAndSortingRepository<T, ID>, QueryByExampleExecutor<T> {
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.springframework.data.repository.CrudRepository#findAll()
+	 */
+	@Override
+	List<T> findAll();
+		// findAll() 함수는 만약에 회원수가 천만명이라고 치면은
+		// 엄청난 천만명의 회원을 리스트에 넣고 힙에 넣으면
+		// out of memory 가 발생할것이므로 잘사용하지않는다.
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.springframework.data.repository.PagingAndSortingRepository#findAll(org.springframework.data.domain.Sort)
+	 */
+	@Override
+	List<T> findAll(Sort sort);
+		// 정렬값이 추가된 조회이다.
+		
+
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.springframework.data.repository.CrudRepository#findAll(java.lang.Iterable)
+	 */
+	@Override
+	List<T> findAllById(Iterable<ID> ids);
+		// id 값이 리스트로 들어가게된다.
+		// id 값을 리스트로 받아서 in 구문으로 조회해서 여러가지
+		// entity 들을 조회하는 메서드이다.
+	/*
+	 * (non-Javadoc)
+	 * @see org.springframework.data.repository.CrudRepository#save(java.lang.Iterable)
+	 */
+	@Override
+	<S extends T> List<S> saveAll(Iterable<S> entities);
+		// entity를 list 형식으로 받아서 전부다 한꺼번에 
+		// DB 에 저장 (반영) 하도록 하는 메서드이다. 
+
+	/**
+	 * Flushes all pending changes to the database.
+	 */
+	void flush();
+		// 현재 JPA 컨택스트에서 가지고있는 DB값을 DB에 반영하도록 
+		// 지시하는 그런 메서드이다.
+		
+	/**
+	 * Saves an entity and flushes changes instantly.
+	 *
+	 * @param entity entity to be saved. Must not be {@literal null}.
+	 * @return the saved entity
+	 */
+	<S extends T> S saveAndFlush(S entity);
+		// 저장한 데이터를 JPA 컨택스트에서 가지고 있지 말고
+		// 바로 DB에 반영해서 적용할것을 지시하는 메서드이다.	
+
+	/**
+	 * Saves all entities and flushes changes instantly.
+	 *
+	 * @param entities entities to be deleted. Must not be {@literal null}.
+	 * @return the saved entities
+	 * @since 2.5
+	 */
+	<S extends T> List<S> saveAllAndFlush(Iterable<S> entities);
+
+	/**
+	 * Deletes the given entities in a batch which means it will create a single query. This kind of operation leaves JPAs
+	 * first level cache and the database out of sync. Consider flushing the {@link EntityManager} before calling this
+	 * method.
+	 *
+	 * @param entities entities to be deleted. Must not be {@literal null}.
+	 * @deprecated Use {@link #deleteAllInBatch(Iterable)} instead.
+	 */
+	@Deprecated
+	default void deleteInBatch(Iterable<T> entities){deleteAllInBatch(entities);}
+
+	/**
+	 * Deletes the given entities in a batch which means it will create a single query. This kind of operation leaves JPAs
+	 * first level cache and the database out of sync. Consider flushing the {@link EntityManager} before calling this
+	 * method.
+	 *
+	 * @param entities entities to be deleted. Must not be {@literal null}.
+	 * @since 2.5
+	 */
+	void deleteAllInBatch(Iterable<T> entities);
+
+
+	/**
+	 * Deletes the entities identified by the given ids using a single query. This kind of operation leaves JPAs first
+	 * level cache and the database out of sync. Consider flushing the {@link EntityManager} before calling this method.
+	 *
+	 * @param ids the ids of the entities to be deleted. Must not be {@literal null}.
+	 * @since 2.5
+	 */
+	void deleteAllByIdInBatch(Iterable<ID> ids);
+
+	/**
+	 * Deletes all entities in a batch call.
+	 */
+	void deleteAllInBatch();
+		// ENTITY를 리스트 형식으로 받아서 한꺼번에 지우는 메서드이다.
+		// 조건없이 통째로 지우는 메서드이다.
+		// 실제로직에서는 쓸일이 거의~~~~ 없다.
+	
+
+	/**
+	 * Returns a reference to the entity with the given identifier. Depending on how the JPA persistence provider is
+	 * implemented this is very likely to always return an instance and throw an
+	 * {@link javax.persistence.EntityNotFoundException} on first access. Some of them will reject invalid identifiers
+	 * immediately.
+	 *
+	 * @param id must not be {@literal null}.
+	 * @return a reference to the entity with the given identifier.
+	 * @see EntityManager#getReference(Class, Object) for details on when an exception is thrown.
+	 * @deprecated use {@link JpaRepository#getById(ID)} instead.
+	 */
+	@Deprecated
+	T getOne(ID id);
+		// 아이디 값을 가지고 딱 찍어서 해당 ENTITY 값을 조회하는 메서드이다.
+
+
+
+	/**
+	 * Returns a reference to the entity with the given identifier. Depending on how the JPA persistence provider is
+	 * implemented this is very likely to always return an instance and throw an
+	 * {@link javax.persistence.EntityNotFoundException} on first access. Some of them will reject invalid identifiers
+	 * immediately.
+	 *
+	 * @param id must not be {@literal null}.
+	 * @return a reference to the entity with the given identifier.
+	 * @see EntityManager#getReference(Class, Object) for details on when an exception is thrown.
+	 * @since 2.5
+	 */
+	T getById(ID id);
+				
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.springframework.data.repository.query.QueryByExampleExecutor#findAll(org.springframework.data.domain.Example)
+	 */
+	@Override
+	<S extends T> List<S> findAll(Example<S> example);
+		// Example 을 이용한 쿼리도 제공한다.
+
+	/*
+	 * (non-Javadoc)
+	 * @see org.springframework.data.repository.query.QueryByExampleExecutor#findAll(org.springframework.data.domain.Example, org.springframework.data.domain.Sort)
+	 */
+	@Override
+	<S extends T> List<S> findAll(Example<S> example, Sort sort);
+		// 똑같은 findAll 이지만 Example 을 추가함으로써
+		// Example 과 정렬값 sort 를 가지고 findAll을 한다.
+}
+	
+
+--------- PagingAndSortingRepository
+
+@NoRepositoryBean
+public interface PagingAndSortingRepository<T, ID> extends CrudRepository<T, ID> {
+
+	/**
+	 * Returns all entities sorted by the given options.
+	 *
+	 * @param sort
+	 * @return all entities sorted by the given options
+	 */
+	Iterable<T> findAll(Sort sort);
+
+	/**
+	 * Returns a {@link Page} of entities meeting the paging restriction provided in the {@code Pageable} object.
+	 *
+	 * @param pageable
+	 * @return a page of entities
+	 */
+	Page<T> findAll(Pageable pageable);
+
+
+	// 여기에서도 동일하게 Iterable<T> findAll(Sort sort);
+	// Page<T> findAll(Pageable pageable); 을 둘다 제공해준다.
+}
+
+
+-------- CrudRepository
+// 우리가 사용하는 기본적이면서 많은 메서드들을 CrudRepository 에 대부분 정의되 있다.
+
+@NoRepositoryBean
+public interface CrudRepository<T, ID> extends Repository<T, ID> {
+
+	/**
+	 * Saves a given entity. Use the returned instance for further operations as the save operation might have changed the
+	 * entity instance completely.
+	 *
+	 * @param entity must not be {@literal null}.
+	 * @return the saved entity; will never be {@literal null}.
+	 * @throws IllegalArgumentException in case the given {@literal entity} is {@literal null}.
+	 */
+	<S extends T> S save(S entity);
+		// entity 에 대한 저장을 제공하고있다.
+
+
+	/**
+	 * Saves all given entities.
+	 *
+	 * @param entities must not be {@literal null} nor must it contain {@literal null}.
+	 * @return the saved entities; will never be {@literal null}. The returned {@literal Iterable} will have the same size
+	 *         as the {@literal Iterable} passed as an argument.
+	 * @throws IllegalArgumentException in case the given {@link Iterable entities} or one of its entities is
+	 *           {@literal null}.
+	 */
+	<S extends T> Iterable<S> saveAll(Iterable<S> entities);
+		// Iterable 즉 list 타입 entity 의 묶음들을 한꺼번에 저장하는 메서드이다.		
+
+
+	/**
+	 * Retrieves an entity by its id.
+	 *
+	 * @param id must not be {@literal null}.
+	 * @return the entity with the given id or {@literal Optional#empty()} if none found.
+	 * @throws IllegalArgumentException if {@literal id} is {@literal null}.
+	 */
+	Optional<T> findById(ID id);
+		// getOne 과는 동작이 조금 다르다!		
+		
+
+	/**
+	 * Returns whether an entity with the given id exists.
+	 *
+	 * @param id must not be {@literal null}.
+	 * @return {@literal true} if an entity with the given id exists, {@literal false} otherwise.
+	 * @throws IllegalArgumentException if {@literal id} is {@literal null}.
+	 */
+	boolean existsById(ID id);
+		// 해당 객체가 존재하는지 여부를 바로 확인해주는 메서드이다.	
+	
+	/**
+	 * Returns all instances of the type.
+	 *
+	 * @return all entities
+	 */
+	Iterable<T> findAll();
+		// 이전에 본것과 동일
+	/**
+	 * Returns all instances of the type {@code T} with the given IDs.
+	 * <p>
+	 * If some or all ids are not found, no entities are returned for these IDs.
+	 * <p>
+	 * Note that the order of elements in the result is not guaranteed.
+	 *
+	 * @param ids must not be {@literal null} nor contain any {@literal null} values.
+	 * @return guaranteed to be not {@literal null}. The size can be equal or less than the number of given
+	 *         {@literal ids}.
+	 * @throws IllegalArgumentException in case the given {@link Iterable ids} or one of its items is {@literal null}.
+	 */
+	Iterable<T> findAllById(Iterable<ID> ids);
+		// 이전에 본것과 동일
+
+	/**
+	 * Returns the number of entities available.
+	 *
+	 * @return the number of entities.
+	 */
+	long count();
+		// 전체 entity 의 갯수를 가져올 수 있다.
+		// pagging 할때 이 메서드를 활용해야 pagging이 가능하다.
+
+	/**
+	 * Deletes the entity with the given id.
+	 *
+	 * @param id must not be {@literal null}.
+	 * @throws IllegalArgumentException in case the given {@literal id} is {@literal null}
+	 */
+	void deleteById(ID id);
+		// id 를 찍어서 delete 하는 것도 있다.
+
+	/**
+	 * Deletes a given entity.
+	 *
+	 * @param entity must not be {@literal null}.
+	 * @throws IllegalArgumentException in case the given entity is {@literal null}.
+	 */
+	void delete(T entity);
+
+	/**
+	 * Deletes all instances of the type {@code T} with the given IDs.
+	 *
+	 * @param ids must not be {@literal null}. Must not contain {@literal null} elements.
+	 * @throws IllegalArgumentException in case the given {@literal ids} or one of its elements is {@literal null}.
+	 * @since 2.5
+	 */
+	void deleteAllById(Iterable<? extends ID> ids);
+
+	/**
+	 * Deletes the given entities.
+	 *
+	 * @param entities must not be {@literal null}. Must not contain {@literal null} elements.
+	 * @throws IllegalArgumentException in case the given {@literal entities} or one of its entities is {@literal null}.
+	 */
+	void deleteAll(Iterable<? extends T> entities);
+
+	/**
+	 * Deletes all entities managed by the repository.
+	 */
+	void deleteAll();
+}
+
+------- Repository
+
+최상위에 있는 이 Repository 는 JPA 에서 사용하는
+도메인 Repository 타입 이라는것을 알려주기위한 인터페이스이고
+실제로 메서드에대한 정의는 존재하지않다.
+
+
+------- JpaRepository 에 상속한 QueryByExampleExecutor
+
+public interface QueryByExampleExecutor<T> {
+
+	/**
+	 * Returns a single entity matching the given {@link Example} or {@literal null} if none was found.
+	 *
+	 * @param example must not be {@literal null}.
+	 * @return a single entity matching the given {@link Example} or {@link Optional#empty()} if none was found.
+	 * @throws org.springframework.dao.IncorrectResultSizeDataAccessException if the Example yields more than one result.
+	 */
+	<S extends T> Optional<S> findOne(Example<S> example);
+
+	/**
+	 * Returns all entities matching the given {@link Example}. In case no match could be found an empty {@link Iterable}
+	 * is returned.
+	 *
+	 * @param example must not be {@literal null}.
+	 * @return all entities matching the given {@link Example}.
+	 */
+	<S extends T> Iterable<S> findAll(Example<S> example);
+
+	/**
+	 * Returns all entities matching the given {@link Example} applying the given {@link Sort}. In case no match could be
+	 * found an empty {@link Iterable} is returned.
+	 *
+	 * @param example must not be {@literal null}.
+	 * @param sort the {@link Sort} specification to sort the results by, must not be {@literal null}.
+	 * @return all entities matching the given {@link Example}.
+	 * @since 1.10
+	 */
+	<S extends T> Iterable<S> findAll(Example<S> example, Sort sort);
+
+	/**
+	 * Returns a {@link Page} of entities matching the given {@link Example}. In case no match could be found, an empty
+	 * {@link Page} is returned.
+	 *
+	 * @param example must not be {@literal null}.
+	 * @param pageable can be {@literal null}.
+	 * @return a {@link Page} of entities matching the given {@link Example}.
+	 */
+	<S extends T> Page<S> findAll(Example<S> example, Pageable pageable);
+
+	/**
+	 * Returns the number of instances matching the given {@link Example}.
+	 *
+	 * @param example the {@link Example} to count instances for. Must not be {@literal null}.
+	 * @return the number of instances matching the {@link Example}.
+	 */
+	<S extends T> long count(Example<S> example);
+
+	/**
+	 * Checks whether the data store contains elements that match the given {@link Example}.
+	 *
+	 * @param example the {@link Example} to use for the existence check. Must not be {@literal null}.
+	 * @return {@literal true} if the data store contains elements that match the given {@link Example}.
+	 */
+	<S extends T> boolean exists(Example<S> example);
+}
+
