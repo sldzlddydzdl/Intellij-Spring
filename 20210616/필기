@@ -1,0 +1,7 @@
+resources : 
+  properties.yml
+    ->
+
+    spring:
+      jpa:
+        defer-datasource-initialization: true
