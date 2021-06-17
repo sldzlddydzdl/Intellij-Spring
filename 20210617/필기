@@ -1,0 +1,23 @@
+IDENTITY
+
+	MYSQL 에서 사용하는값 
+
+	일반적으로는  MYSQL 에서 많이사용하는 전략이다.
+	아무래도 상용서비스경우에는 MYSQL 이나 MARIADB를 쓰는경우가만ㅇ하서
+	많있는 설정이다. MYSQL 에서 AUTO INCREATMENT 를 사용해서 IDENTITY를 제공하고있다.
+
+
+SEQUENCE  
+	
+	ORACLE , 포스그램 SQL 등에서사용하는 것이다.
+	H2 DB 도 SEQUENCE 를 쓴다.
+	call next value for hibernate_sequence; 처럼 H2 에는 SEQUENCE 를사용한다.
+	INSERT 가실행될때 ID 를 채워서 쿼리를 수행하도록하는것이다.
+
+
+TABLE 
+
+	DB 종류의 상관없이 ID 값을 관리하는 별도의 테이블을 만들어두고
+	그테이블에서 ID 값을 계속 추출해서 사용할수있도록 사용하고있다.
+
+
