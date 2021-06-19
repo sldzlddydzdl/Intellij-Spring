@@ -1,0 +1,6 @@
+ERD 
+
+User 은 UserRepository 를 참고하지만 UserRepository 는 UserService 를 
+일반적으로 참고하고있지 않다.
+
+web darwer.io 에서 연관관계 그려보기
