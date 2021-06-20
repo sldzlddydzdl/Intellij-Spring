@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.fastcampus.jpa.bookmanager.repository.BookRepositoryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-20T12:27:29" hostname="LAPTOP-IPOJ3GNM" time="0.482">
+  <properties/>
+  <testcase name="bookRelationTest()" classname="com.fastcampus.jpa.bookmanager.repository.BookRepositoryTest" time="0.482"/>
+  <system-out><![CDATA[21:27:22.584 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+21:27:22.595 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+21:27:22.633 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [com.fastcampus.jpa.bookmanager.repository.BookRepositoryTest] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+21:27:22.653 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [com.fastcampus.jpa.bookmanager.repository.BookRepositoryTest], using SpringBootContextLoader
+21:27:22.669 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.fastcampus.jpa.bookmanager.repository.BookRepositoryTest]: class path resource [com/fastcampus/jpa/bookmanager/repository/BookRepositoryTest-context.xml] does not exist
+21:27:22.670 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [com.fastcampus.jpa.bookmanager.repository.BookRepositoryTest]: class path resource [com/fastcampus/jpa/bookmanager/repository/BookRepositoryTestContext.groovy] does not exist
+21:27:22.671 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [com.fastcampus.jpa.bookmanager.repository.BookRepositoryTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+21:27:22.673 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [com.fastcampus.jpa.bookmanager.repository.BookRepositoryTest]: BookRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:27:22.738 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.fastcampus.jpa.bookmanager.repository.BookRepositoryTest]
+21:27:22.861 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [C:\Users\rlaeh\IdeaProjects\bookmanager\build\classes\java\main\com\fastcampus\jpa\bookmanager\BookmanagerApplication.class]
+21:27:22.864 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration com.fastcampus.jpa.bookmanager.BookmanagerApplication for test class com.fastcampus.jpa.bookmanager.repository.BookRepositoryTest
+21:27:23.010 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [com.fastcampus.jpa.bookmanager.repository.BookRepositoryTest]: using defaults.
+21:27:23.011 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+21:27:23.035 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@731922f2, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@739e75b7, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@5a898a7c, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@1d4ccc1a, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@27f873f3, org.springframework.test.context.support.DirtiesContextTestExecutionListener@27cb9976, org.springframework.test.context.transaction.TransactionalTestExecutionListener@31873d99, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@4ad00baf, org.springframework.test.context.event.EventPublishingTestExecutionListener@2ed38eed, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@5528a268, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@5d4b26a1, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@170cc3d4, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@251a833e, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@35b14e17, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@314b182e]
+21:27:23.039 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@115c6d04 testClass = BookRepositoryTest, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71d115b7 testClass = BookRepositoryTest, locations = '{}', classes = '{class com.fastcampus.jpa.bookmanager.BookmanagerApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@7ea4d91b, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@1d636cf2, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@331ca8dd, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@7e08ea5e, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@128e06ff, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@39a00d2b], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true]], class annotated with @DirtiesContext [false] with mode [null].
+21:27:23.073 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.5.1)
+
+2021-06-20 21:27:23.558  INFO 32816 --- [    Test worker] c.f.j.b.repository.BookRepositoryTest    : Starting BookRepositoryTest using Java 11.0.11 on LAPTOP-IPOJ3GNM with PID 32816 (started by rlaeh in C:\Users\rlaeh\IdeaProjects\bookmanager)
+2021-06-20 21:27:23.561  INFO 32816 --- [    Test worker] c.f.j.b.repository.BookRepositoryTest    : No active profile set, falling back to default profiles: default
+2021-06-20 21:27:24.482  INFO 32816 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-20 21:27:24.614  INFO 32816 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 121 ms. Found 6 JPA repository interfaces.
+2021-06-20 21:27:25.399  INFO 32816 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-20 21:27:25.678  INFO 32816 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-20 21:27:25.799  INFO 32816 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-20 21:27:25.883  INFO 32816 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.32.Final
+2021-06-20 21:27:26.136  INFO 32816 --- [    Test worker] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-20 21:27:26.389  INFO 32816 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+Hibernate: 
+    
+    drop table if exists address CASCADE 
+Hibernate: 
+    
+    drop table if exists book CASCADE 
+Hibernate: 
+    
+    drop table if exists book_review_info CASCADE 
+Hibernate: 
+    
+    drop table if exists publisher CASCADE 
+Hibernate: 
+    
+    drop table if exists review CASCADE 
+Hibernate: 
+    
+    drop table if exists user CASCADE 
+Hibernate: 
+    
+    drop table if exists user_history CASCADE 
+Hibernate: 
+    
+    create table address (
+       id bigint not null,
+        primary key (id)
+    )
+Hibernate: 
+    
+    create table book (
+       id bigint generated by default as identity,
+        created_at timestamp,
+        updated_at timestamp,
+        author_id bigint,
+        category varchar(255),
+        name varchar(255),
+        publisher_id bigint,
+        primary key (id)
+    )
+Hibernate: 
+    
+    create table book_review_info (
+       id bigint generated by default as identity,
+        created_at timestamp,
+        updated_at timestamp,
+        average_review_score float not null,
+        review_count integer not null,
+        book_id bigint not null,
+        primary key (id)
+    )
+Hibernate: 
+    
+    create table publisher (
+       id bigint generated by default as identity,
+        created_at timestamp,
+        updated_at timestamp,
+        name varchar(255),
+        primary key (id)
+    )
+Hibernate: 
+    
+    create table review (
+       id bigint generated by default as identity,
+        created_at timestamp,
+        updated_at timestamp,
+        content varchar(255),
+        score float not null,
+        title varchar(255),
+        book_id bigint,
+        user_id bigint,
+        primary key (id)
+    )
+Hibernate: 
+    
+    create table user (
+       id bigint generated by default as identity,
+        created_at timestamp,
+        updated_at timestamp,
+        email varchar(255),
+        gender varchar(255),
+        name varchar(255),
+        primary key (id)
+    )
+Hibernate: 
+    
+    create table user_history (
+       id bigint generated by default as identity,
+        created_at timestamp,
+        updated_at timestamp,
+        email varchar(255),
+        name varchar(255),
+        user_id bigint,
+        primary key (id)
+    )
+Hibernate: 
+    
+    alter table book_review_info 
+       add constraint UK_l3sai9mhbl4cd12t2rwdwe0ee unique (book_id)
+Hibernate: create index IDXgj2fy3dcix7ph7k8684gka40c on user (name)
+Hibernate: 
+    
+    alter table user 
+       add constraint UKob8kqyqqgmefl0aco34akdtpe unique (email)
+Hibernate: 
+    
+    alter table book 
+       add constraint FKgtvt7p649s4x80y6f4842pnfq 
+       foreign key (publisher_id) 
+       references publisher
+Hibernate: 
+    
+    alter table book_review_info 
+       add constraint FKp5fhkokpbtoxmc3mxo8ay9e5l 
+       foreign key (book_id) 
+       references book
+Hibernate: 
+    
+    alter table review 
+       add constraint FK70yrt09r4r54tcgkrwbeqenbs 
+       foreign key (book_id) 
+       references book
+Hibernate: 
+    
+    alter table review 
+       add constraint FKiyf57dy48lyiftdrf7y87rnxi 
+       foreign key (user_id) 
+       references user
+Hibernate: 
+    
+    alter table user_history 
+       add constraint FKaa6ilb6iqih95bntoeyysb2pc 
+       foreign key (user_id) 
+       references user
+2021-06-20 21:27:27.337  INFO 32816 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-20 21:27:27.364  INFO 32816 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-20 21:27:27.721  WARN 32816 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-06-20 21:27:28.087  INFO 32816 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:6150704e-e7a6-47fc-a624-afa6a7c5e9e8'
+2021-06-20 21:27:29.303  INFO 32816 --- [    Test worker] c.f.j.b.repository.BookRepositoryTest    : Started BookRepositoryTest in 6.223 seconds (JVM running for 8.028)
+2021-06-20 21:27:29.350  INFO 32816 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@115c6d04 testClass = BookRepositoryTest, testInstance = com.fastcampus.jpa.bookmanager.repository.BookRepositoryTest@2d63aa36, testMethod = bookRelationTest@BookRepositoryTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71d115b7 testClass = BookRepositoryTest, locations = '{}', classes = '{class com.fastcampus.jpa.bookmanager.BookmanagerApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@7ea4d91b, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@1d636cf2, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@331ca8dd, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@7e08ea5e, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@128e06ff, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@39a00d2b], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -> true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@12632aaa]; rollback [true]
+Hibernate: 
+    select
+        user0_.id as id1_5_,
+        user0_.created_at as created_2_5_,
+        user0_.updated_at as updated_3_5_,
+        user0_.email as email4_5_,
+        user0_.gender as gender5_5_,
+        user0_.name as name6_5_ 
+    from
+        user user0_ 
+    where
+        user0_.email=?
+Hibernate: 
+    select
+        userhistor0_.user_id as user_id6_6_0_,
+        userhistor0_.id as id1_6_0_,
+        userhistor0_.id as id1_6_1_,
+        userhistor0_.created_at as created_2_6_1_,
+        userhistor0_.updated_at as updated_3_6_1_,
+        userhistor0_.email as email4_6_1_,
+        userhistor0_.name as name5_6_1_,
+        userhistor0_.user_id as user_id6_6_1_ 
+    from
+        user_history userhistor0_ 
+    where
+        userhistor0_.user_id=?
+Hibernate: 
+    insert 
+    into
+        publisher
+        (id, created_at, updated_at, name) 
+    values
+        (null, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        book
+        (id, created_at, updated_at, author_id, category, name, publisher_id) 
+    values
+        (null, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        review
+        (id, created_at, updated_at, book_id, content, score, title, user_id) 
+    values
+        (null, ?, ?, ?, ?, ?, ?, ?)
+Hibernate: 
+    select
+        user0_.id as id1_5_,
+        user0_.created_at as created_2_5_,
+        user0_.updated_at as updated_3_5_,
+        user0_.email as email4_5_,
+        user0_.gender as gender5_5_,
+        user0_.name as name6_5_ 
+    from
+        user user0_ 
+    where
+        user0_.email=?
+Hibernate: 
+    select
+        reviews0_.user_id as user_id8_4_0_,
+        reviews0_.id as id1_4_0_,
+        reviews0_.id as id1_4_1_,
+        reviews0_.created_at as created_2_4_1_,
+        reviews0_.updated_at as updated_3_4_1_,
+        reviews0_.book_id as book_id7_4_1_,
+        reviews0_.content as content4_4_1_,
+        reviews0_.score as score5_4_1_,
+        reviews0_.title as title6_4_1_,
+        reviews0_.user_id as user_id8_4_1_,
+        book1_.id as id1_1_2_,
+        book1_.created_at as created_2_1_2_,
+        book1_.updated_at as updated_3_1_2_,
+        book1_.author_id as author_i4_1_2_,
+        book1_.category as category5_1_2_,
+        book1_.name as name6_1_2_,
+        book1_.publisher_id as publishe7_1_2_,
+        publisher2_.id as id1_3_3_,
+        publisher2_.created_at as created_2_3_3_,
+        publisher2_.updated_at as updated_3_3_3_,
+        publisher2_.name as name4_3_3_,
+        bookreview3_.id as id1_2_4_,
+        bookreview3_.created_at as created_2_2_4_,
+        bookreview3_.updated_at as updated_3_2_4_,
+        bookreview3_.average_review_score as average_4_2_4_,
+        bookreview3_.book_id as book_id6_2_4_,
+        bookreview3_.review_count as review_c5_2_4_ 
+    from
+        review reviews0_ 
+    left outer join
+        book book1_ 
+            on reviews0_.book_id=book1_.id 
+    left outer join
+        publisher publisher2_ 
+            on book1_.publisher_id=publisher2_.id 
+    left outer join
+        book_review_info bookreview3_ 
+            on book1_.id=bookreview3_.book_id 
+    where
+        reviews0_.user_id=?
+Review : [Review(super=BaseEntity(createdAt=2021-06-20T21:27:29.770805, updatedAt=2021-06-20T21:27:29.770805), id=1, title=내 인생을 바꾼 책, content=너무너무 재미있고 즐거운 책이었어요., score=5.0, user=User(super=BaseEntity(createdAt=2021-06-20T21:27:29.193331, updatedAt=2021-06-20T21:27:29.193331), id=1, name=martin, email=martin@fastcampus.com, gender=null), book=Book(super=BaseEntity(createdAt=2021-06-20T21:27:29.754847600, updatedAt=2021-06-20T21:27:29.754847600), id=1, name=Jpa 초격차 패키지, category=null, authorId=null))]
+Book : Book(super=BaseEntity(createdAt=2021-06-20T21:27:29.754847600, updatedAt=2021-06-20T21:27:29.754847600), id=1, name=Jpa 초격차 패키지, category=null, authorId=null)
+Publisher : Publisher(super=BaseEntity(createdAt=2021-06-20T21:27:29.706974400, updatedAt=2021-06-20T21:27:29.706974400), id=1, name=패스트캠퍼스, books=[])
+2021-06-20 21:27:29.811  INFO 32816 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@115c6d04 testClass = BookRepositoryTest, testInstance = com.fastcampus.jpa.bookmanager.repository.BookRepositoryTest@2d63aa36, testMethod = bookRelationTest@BookRepositoryTest, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@71d115b7 testClass = BookRepositoryTest, locations = '{}', classes = '{class com.fastcampus.jpa.bookmanager.BookmanagerApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@7ea4d91b, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@1d636cf2, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@331ca8dd, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@7e08ea5e, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@128e06ff, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@39a00d2b], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -> true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
