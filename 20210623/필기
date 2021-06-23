@@ -1,0 +1,160 @@
+
+WebSecurityConfiguerAdapter 클래스가 
+DelegratingFilterProxy , FilterChainProxy 라고 생각하면 편하다.
+
+HttpSecurity 가 
+Security Filter 들의 역할을 한다.
+
+HeaderWriterFilter : Http 해더를 검사한다. 써야 할 건 잘 써있는지, 필요한 해더를 더해줘야 할 건 없는가?
+
+CorsFilter : 허가된 사이트나 클라이언트의 요청인가?
+
+CsrfFilter : 내가 내보낸 리소스에서 올라온 요청인가? 
+Post 나 Put 에서 내가 내려온 리소스 요청인지 확인한다.
+
+
+LogoutFilter : 지금 로그아웃하겠다고 하는건가?
+현재 Request 가 로그아웃하겠단지만 물어보는 filter이다.
+
+UsernamePasswordAuthenticationFilter : username / password 로 로그인을 하려고 하는가? 만약 로그인이면 여기서 처리하고 가야 할 페이지로 보내 줄께.
+id , password 로 로그인을 할려는 요청이 들어오면 이필터가 동작을해서
+승인이 되면 authentication 을 유저에게 부여해주거나 아니면 
+인증실패 처리를 하게된다.
+
+ConcurrentSessionFilter : 여거저기서 로그인 하는걸 허용할 것인가?
+여기저기서 로그인하는걸 허용할 것인가?
+동시에 로그인 하는걸 허용할것인가? 이쪾에 관심을 가지고있다.
+
+BearerTokenAuthenticationFilter : Authorization 해더에 Bearer 토큰이 오면 인증 처리 해줄께.
+
+BasicAuthenticationFilter : Authorization 해더에 Basic 토큰을 주면 검사해서 인증처리 해줄께.
+
+RequestCacheAwareFilter : 방금 요청한 request 이력이 다음에 필요할 수 있으니 캐시에 담아놓을께.
+캐시요청이오면 이전캐시를지우는 것이다.
+
+SecurityContextHolderAwareRequestFilter : 보안 관련 Servlet 3 스펙을 지원하기 위한 필터라고 한다.(?)
+
+RememberMeAuthenticationFilter : 아직 Authentication 인증이 안된 경우라면 RememberMe 쿠키를 검사해서 인증 처리해줄께
+세션이 만료되더라도 재 로그인없이 쓸수있게해주는 기법
+이때는 브라우저에 뭍어있는 RememberMe 쿠키를 가지고 인증을 해주는것이다.
+
+AnonymousAuthenticationFilter : 아직도 인증이 안되었으면 너는 Anonymous 사용자야
+authentication 이 아직도 채워지지 않았다면 익명사용자라고 지정해줌
+이는 authentication 이 NULL 이 아닌것을 방지해준다.
+
+SessionManagementFilter : 서버에서 지정한 세션정책을 검사할께.
+
+ExcpetionTranslationFilter : 나 이후에 인증이나 권한 예외가 발생하면 내가 잡아서 처리해 줄께.
+
+FilterSecurityInterceptor : 여기까지 살아서 왔다면 인증이 있다는 거니, 니가 들어가려고 하는 request 에 들어갈 자격이 있는지 그리고 리턴한 결과를 너에게 보내줘도 되는건지 마지막으로 내가 점검해 줄께.
+그 밖에... OAuth2 나 Saml2, Cas, X509 등에 관한 필터들도 있습니다.
+
+필터는 넣거나 뺄 수 있고 순서를 조절할 수 있습니다. (이때 필터의 순서가 매우 critical 할 수 있기 때문에 기본 필터들은 그 순서가 어느정도 정해져 있습니다.)
+
+authentication 만 이해해도 spring security 의 절반은이해했다.
+
+
+------------------------------------------- 로그인 하기
+
+
+인증 토큰 ( Authentication ) 을 제공하는 필터들
+
+UsernamePasswordAuthenticationFilter : 폼 로그인 -> UsernamePasswordAuthenticationToken
+RememberMeAuthenticationFilter : remember-me 쿠키 로그인 -> RememberMeAuthenticationToken
+AnonymousAuthenticationFilter : 로그인하지 않았다는 것을 인증함 -> AnonymousAuthenticationToken
+SecurityContextPersistenceFilter : 기존 로그인을 유지함(기본적으로 session 을 이용함)
+BearerTokenAuthenticationFilter : JWT 로그인
+BasicAuthenticationFilter : ajax 로그인 -> UsernamePasswordAuthenticationToken
+OAuth2LoginAuthenticationFilter : 소셜 로그인 -> OAuth2LoginAuthenticationToken, OAuth2AuthenticationToken
+OpenIDAuthenticationFilter : OpenID 로그인
+Saml2WebSsoAuthenticationFilter : SAML2 로그인
+... 기타
+
+1.폼로그인 2. 세션을 담고있다가 3. 이후로그인에서 SecurityContextPersistFilter 에 
+다시 Authentication 을 넣어둔다.
+
+Authentication 을 제공(Provide) 하는 인증제공자는 여러개가 동시에 존재할 수 있고, 인증 방식에 따라 ProviderManager 도 복수로 존재할 수 있습니다.
+
+
+Authentication 은 인터페이스로 아래와 같은 정보들을 갖고 있습니다.
+
+
+Set<GrantedAuthority> authorities : 인증된 권한 정보
+
+principal : 인증 대상에 관한 정보. 주로 UserDetails 객체가 옴
+
+credentials : 인증 확인을 위한 정보. 주로 비밀번호가 오지만, 인증 후에는 보안을 위해 삭제함.
+
+details : 그 밖에 필요한 정보. IP, 세션정보, 기타 인증요청에서 사용했던 정보들.
+
+boolean authenticated : 인증이 되었는지를 체크함.
+
+폼 로그인
+
+DefaultLoginPageGeneratingFilter
+
+	GET /login 을 처리
+	별도의 로그인 페이지 설정을 하지 않으면 제공되는 필터	
+	기본 로그인 폼을 제공
+	OAuth2 / OpenID / Saml2 로그인과도 같이 사용할 수 있음.
+
+
+UsernamePasswordAuthenticationFilter
+
+
+		POST /login 을 처리. processingUrl 을 변경하면 주소를 바꿀 수 있음.
+
+
+		form 인증을 처리해주는 필터로 스프링 시큐리티에서 가장 일반적으로 쓰임.
+
+
+	주요 설정 정보
+
+		filterProcessingUrl : 로그인을 처리해 줄 URL (POST)
+		username parameter : POST에 username에 대한 값을 넘겨줄 인자의 이름
+		password parameter : POST에 password에 대한 값을 넘겨줄 인자의 이름
+	로그인 성공시 처리 방법
+
+		defaultSuccessUrl : alwaysUse 옵션 설정이 중요
+		successHandler
+
+
+	로그인 실패시 처리 방법
+
+		failureUrl
+		failureHandler
+
+
+	authenticationDetailSource : Authentication 객체의 details 에 들어갈 정보를 직접 만들어 줌.
+
+
+
+DefaultLoginPageGeneratingFilter 클래스를 보면
+
+oauth2LoginEnabled 가 true 이면 소셜로그인할때 테스트함
+true 이면 facebook이나 google 사이트 링크가노출된다.
+
+
+DefaultLogoutPageGeneratingFilter
+
+GET /logout 을 처리
+POST /logout 을 요청할 수 있는 UI 를 제공
+DefaultLoginPageGeneratingFilter 를 사용하는 경우에 같이 제공됨.
+
+LogoutHandler
+
+void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication);
+SecurityContextLogoutHandler : 세션과 SecurityContext 를 clear 함.
+CookieClearingLogoutHandler : clear 대상이 된 쿠키들을 삭제함.
+CsrfLogoutHandler : csrfTokenRepository 에서 csrf 토큰을 clear 함.
+HeaderWriterLogoutHandler
+RememberMeServices : remember-me 쿠키를 삭제함.
+LogoutSuccessEventPublishingLogoutHandler : 로그아웃이 성공하면 이벤트를 발행함.
+
+
+
+LogoutSuccessHandler
+
+void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+throws IOException, ServletException;
+SimpleUrlLogoutSuccessHandler
