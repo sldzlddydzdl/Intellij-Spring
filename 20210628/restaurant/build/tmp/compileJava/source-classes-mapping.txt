@@ -1,0 +1,34 @@
+com/example/restaurant/wishlist/entity/WishListEntity.java
+ com.example.restaurant.wishlist.entity.WishListEntity
+com/example/restaurant/controller/PageController.java
+ com.example.restaurant.controller.PageController
+com/example/restaurant/naver/dto/SearchImageReq.java
+ com.example.restaurant.naver.dto.SearchImageReq
+com/example/restaurant/RestaurantApplication.java
+ com.example.restaurant.RestaurantApplication
+com/example/restaurant/naver/dto/SearchLocalReq.java
+ com.example.restaurant.naver.dto.SearchLocalReq
+com/example/restaurant/wishlist/dto/WishListDto.java
+ com.example.restaurant.wishlist.dto.WishListDto
+com/example/restaurant/naver/dto/SearchImageRes.java
+ com.example.restaurant.naver.dto.SearchImageRes
+ com.example.restaurant.naver.dto.SearchImageRes$SearchImageItem
+com/example/restaurant/controller/ApiController.java
+ com.example.restaurant.controller.ApiController
+com/example/restaurant/naver/dto/SearchLocalRes.java
+ com.example.restaurant.naver.dto.SearchLocalRes
+ com.example.restaurant.naver.dto.SearchLocalRes$SearchLocalItem
+com/example/restaurant/naver/NaverClient.java
+ com.example.restaurant.naver.NaverClient
+ com.example.restaurant.naver.NaverClient$1
+ com.example.restaurant.naver.NaverClient$2
+com/example/restaurant/db/MemoryDbRepositoryAbstract.java
+ com.example.restaurant.db.MemoryDbRepositoryAbstract
+com/example/restaurant/db/MemoryDbEntity.java
+ com.example.restaurant.db.MemoryDbEntity
+com/example/restaurant/wishlist/service/WishListService.java
+ com.example.restaurant.wishlist.service.WishListService
+com/example/restaurant/wishlist/repository/WishListRepository.java
+ com.example.restaurant.wishlist.repository.WishListRepository
+com/example/restaurant/db/MemoryDbRepositoryIfs.java
+ com.example.restaurant.db.MemoryDbRepositoryIfs
