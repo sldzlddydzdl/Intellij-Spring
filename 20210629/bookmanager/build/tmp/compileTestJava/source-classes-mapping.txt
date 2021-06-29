@@ -1,0 +1,16 @@
+com/fastcampus/jpa/bookmanager/BookmanagerApplicationTests.java
+ com.fastcampus.jpa.bookmanager.BookmanagerApplicationTests
+com/fastcampus/jpa/bookmanager/repository/BookRepositoryTest.java
+ com.fastcampus.jpa.bookmanager.repository.BookRepositoryTest
+com/fastcampus/jpa/bookmanager/domain/UserTest.java
+ com.fastcampus.jpa.bookmanager.domain.UserTest
+com/fastcampus/jpa/bookmanager/repository/AuthorRepositoryTest.java
+ com.fastcampus.jpa.bookmanager.repository.AuthorRepositoryTest
+com/fastcampus/jpa/bookmanager/repository/UserRepositoryTest.java
+ com.fastcampus.jpa.bookmanager.repository.UserRepositoryTest
+com/fastcampus/jpa/bookmanager/controller/HelloWorldControllerTest.java
+ com.fastcampus.jpa.bookmanager.controller.HelloWorldControllerTest
+com/fastcampus/jpa/bookmanager/repository/BookReviewInfoRepositoryTest.java
+ com.fastcampus.jpa.bookmanager.repository.BookReviewInfoRepositoryTest
+com/fastcampus/jpa/bookmanager/service/EntityManagerTest.java
+ com.fastcampus.jpa.bookmanager.service.EntityManagerTest

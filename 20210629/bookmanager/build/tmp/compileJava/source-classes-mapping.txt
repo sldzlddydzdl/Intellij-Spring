@@ -1,0 +1,53 @@
+com/fastcampus/jpa/bookmanager/controller/HelloWorldController.java
+ com.fastcampus.jpa.bookmanager.controller.HelloWorldController
+com/fastcampus/jpa/bookmanager/support/BeanUtils.java
+ com.fastcampus.jpa.bookmanager.support.BeanUtils
+com/fastcampus/jpa/bookmanager/domain/Address.java
+ com.fastcampus.jpa.bookmanager.domain.Address
+com/fastcampus/jpa/bookmanager/domain/Gender.java
+ com.fastcampus.jpa.bookmanager.domain.Gender
+com/fastcampus/jpa/bookmanager/repository/BookRepository.java
+ com.fastcampus.jpa.bookmanager.repository.BookRepository
+com/fastcampus/jpa/bookmanager/domain/Book.java
+ com.fastcampus.jpa.bookmanager.domain.Book
+com/fastcampus/jpa/bookmanager/repository/UserHistoryRepository.java
+ com.fastcampus.jpa.bookmanager.repository.UserHistoryRepository
+com/fastcampus/jpa/bookmanager/domain/listener/MyEntityListener.java
+ com.fastcampus.jpa.bookmanager.domain.listener.MyEntityListener
+com/fastcampus/jpa/bookmanager/domain/listener/Auditable.java
+ com.fastcampus.jpa.bookmanager.domain.listener.Auditable
+com/fastcampus/jpa/bookmanager/repository/BookReviewInfoRepository.java
+ com.fastcampus.jpa.bookmanager.repository.BookReviewInfoRepository
+com/fastcampus/jpa/bookmanager/domain/BaseEntity.java
+ com.fastcampus.jpa.bookmanager.domain.BaseEntity
+com/fastcampus/jpa/bookmanager/repository/UserRepository.java
+ com.fastcampus.jpa.bookmanager.repository.UserRepository
+com/fastcampus/jpa/bookmanager/domain/listener/UserEntityListener.java
+ com.fastcampus.jpa.bookmanager.domain.listener.UserEntityListener
+com/fastcampus/jpa/bookmanager/repository/PublisherRepository.java
+ com.fastcampus.jpa.bookmanager.repository.PublisherRepository
+com/fastcampus/jpa/bookmanager/domain/Publisher.java
+ com.fastcampus.jpa.bookmanager.domain.Publisher
+com/fastcampus/jpa/bookmanager/repository/ReviewRepository.java
+ com.fastcampus.jpa.bookmanager.repository.ReviewRepository
+com/fastcampus/jpa/bookmanager/domain/UserHistory.java
+ com.fastcampus.jpa.bookmanager.domain.UserHistory
+com/fastcampus/jpa/bookmanager/domain/User.java
+ com.fastcampus.jpa.bookmanager.domain.User
+ com.fastcampus.jpa.bookmanager.domain.User$UserBuilder
+com/fastcampus/jpa/bookmanager/repository/AuthorRepository.java
+ com.fastcampus.jpa.bookmanager.repository.AuthorRepository
+com/fastcampus/jpa/bookmanager/domain/BookAndAuthor.java
+ com.fastcampus.jpa.bookmanager.domain.BookAndAuthor
+com/fastcampus/jpa/bookmanager/repository/BookAndAuthorRepository.java
+ com.fastcampus.jpa.bookmanager.repository.BookAndAuthorRepository
+com/fastcampus/jpa/bookmanager/domain/Author.java
+ com.fastcampus.jpa.bookmanager.domain.Author
+com/fastcampus/jpa/bookmanager/domain/Review.java
+ com.fastcampus.jpa.bookmanager.domain.Review
+com/fastcampus/jpa/bookmanager/domain/BookReviewInfo.java
+ com.fastcampus.jpa.bookmanager.domain.BookReviewInfo
+com/fastcampus/jpa/bookmanager/BookmanagerApplication.java
+ com.fastcampus.jpa.bookmanager.BookmanagerApplication
+com/fastcampus/jpa/bookmanager/configureation/JpaConfiguration.java
+ com.fastcampus.jpa.bookmanager.configureation.JpaConfiguration
