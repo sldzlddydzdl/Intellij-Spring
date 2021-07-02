@@ -1,0 +1,14 @@
+
+Transactional 에서 isolation level 강도 test 
+
+
+ ***************** 한곳에서는 JPA 로 DB 에 데이터를 보내고
+
+ ***************** 한곳에서는 MYSQL Terminal 로 DB 에 데이터를 보내서 
+
+
+	위 둘의 데이터가 동시에 입력되었을때 의 상황을 만든다.
+
+
+
+
