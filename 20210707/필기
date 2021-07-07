@@ -1,0 +1,23 @@
+
+Cascade 활용하기
+
+[ 영어 뜻 ] : 작은폭포 라는 의미이다. 즉 폭포가 위에서 물을 받으면 아래로 흘려보내는것 처럼
+
+ 		영속성도 객체가 폭포처럼 흘려보내준다는 의미이다.
+
+
+One to Many
+
+One to One 에서 cascade 를 설정할수 있다.
+
+Many to One
+
+Many to Many
+
+
+
+에러
+
+error : could not initialize proxy - no Session
+
+lazy loading 이 제대로 
