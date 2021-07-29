@@ -18,7 +18,6 @@ public class HomeController {
         this.securityMessageService = securityMessageService;
     }
 
-    @PreAuthorize("@nameCheck.check(#name)")
     @GetMapping("/greeting/{name}")
     public String greeting(@PathVariable String name){
         return "hello "+securityMessageService.message(name);

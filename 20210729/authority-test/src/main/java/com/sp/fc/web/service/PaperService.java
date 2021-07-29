@@ -1,6 +1,9 @@
 package com.sp.fc.web.service;
 
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -21,14 +24,25 @@ public class PaperService implements InitializingBean {
         paperDB.put(paper.getPaperId(), paper);
     }
 
-    public List<Paper> getMyPapers(String username){
+    @PostFilter("notPrepareState(filterObject)")
+    public List<Paper> getMyPapers(String username) {
+//        return paperDB.values().stream().collect(Collectors.toList());
         return paperDB.values().stream().filter(
-                paper->paper.getStudentIds().contains(username)
+                paper -> paper.getStudentIds().contains(username)
         ).collect(Collectors.toList());
     }
 
-    public Paper getPaper(Long paperId){
+
+//    @PostAuthorize("returnObject.studentIds.contains(principal.username)")
+    public Paper getPaper(Long paperId) {
         return paperDB.get(paperId);
     }
+
+    @Secured({"ROLE_PRIMARY" , "ROLE_RUN_AS_PRIMARY"})
+    public List<Paper> getAllPapers() {
+        return paperDB.values().stream().collect(Collectors.toList());
+
+    }
+
 
 }
