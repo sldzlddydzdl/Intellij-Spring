@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="myStudent" class="SpringEx.Student">
+		<property name="name" value="suyeol"/>
+		<property name="age" value="27"/>
+		<property name="score" ref="myScore"/>
+		<property name="address" ref="myAddress"/>
+	</bean>
+	
+	<bean id="myScore" class="SpringEx.Score">
+		<property name="kor" value="80"/>
+		<property name="eng" value="75"/>
+		<property name="math" value="77"/>
+	</bean>
+	
+	<bean id="myAddress" class="SpringEx.Address">
+		<property name="si" value="인천시"/>
+		<property name="dong" value="계산동"/>
+	</bean>
+	
+</beans>
