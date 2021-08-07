@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 사용되는 모든 클래스를 빈으로 등록하자 -->
+	<bean class="springEx04.TaekwonV">
+		<constructor-arg ref="punch"/>
+		<constructor-arg value="태권"/>
+	</bean>
+	
+	<bean class="springEx04.Transformer">
+		<property name="attack" ref="missile"/>
+		<property name="name" value="트랜스포머"/>
+	</bean>
+	
+	<bean id="punch" class="springEx04.PunchAttack"/>
+	<bean id="missile" class="springEx04.MissileAttack"/>
+
+</beans>
