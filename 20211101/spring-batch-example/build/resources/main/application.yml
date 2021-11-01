@@ -1,0 +1,9 @@
+spring:
+  batch:
+    job:
+      names: ${job.name:NONE}
+#  --job.name=itemWriterJob
+    initialize-schema:
+  datasource:
+    driver-class-name: org.h2.Driver
+    data: classpath:person.sql
